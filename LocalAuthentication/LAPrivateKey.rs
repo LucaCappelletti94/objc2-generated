@@ -29,7 +29,7 @@ impl LAPrivateKey {
         /// `LAPrivateKey`instance
         #[unsafe(method(publicKey))]
         #[unsafe(method_family = none)]
-        pub unsafe fn publicKey(&self) -> Retained<LAPublicKey>;
+        pub fn publicKey(&self) -> Retained<LAPublicKey>;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Generates a digital signature for the given data.
@@ -40,6 +40,10 @@ impl LAPrivateKey {
         /// `SecKeyAlgorithm`suitable for generating signatures with this key – e.g:
         /// `kSecKeyAlgorithmECDSASignatureMessageX962SHA256`
         /// Parameter `handler`: Completion handler with the signature of given data or an error on failure.
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(signData:secKeyAlgorithm:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn signData_secKeyAlgorithm_completion(
@@ -57,7 +61,7 @@ impl LAPrivateKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canSignUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canSignUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
+        pub fn canSignUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Decrypts the given ciphertext
@@ -69,6 +73,10 @@ impl LAPrivateKey {
         /// `SecKeyAlgorithm`suitable for decrypting data with this key –e.g:
         /// `kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM`
         /// Parameter `handler`: Completion handler with plaintext or an error on failure.
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(decryptData:secKeyAlgorithm:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn decryptData_secKeyAlgorithm_completion(
@@ -86,7 +94,7 @@ impl LAPrivateKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canDecryptUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canDecryptUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
+        pub fn canDecryptUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Performs a Diffie-Hellman style key exchange operation
@@ -104,6 +112,8 @@ impl LAPrivateKey {
         /// # Safety
         ///
         /// `parameters` generic should be of the correct type.
+        ///
+        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn exchangeKeysWithPublicKey_secKeyAlgorithm_secKeyParameters_completion(
@@ -122,9 +132,6 @@ impl LAPrivateKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canExchangeKeysUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canExchangeKeysUsingSecKeyAlgorithm(
-            &self,
-            algorithm: &SecKeyAlgorithm,
-        ) -> bool;
+        pub fn canExchangeKeysUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
     );
 }

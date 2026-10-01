@@ -231,6 +231,10 @@ impl LAContext {
         ///
         ///
         /// Returns: YES if the policy can be evaluated, NO otherwise.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize this call with all concurrent `LocalAuthentication` operations in the process, including `LAContext` and `LARight` construction and asynchronous completions.
         #[unsafe(method(canEvaluatePolicy:error:_))]
         #[unsafe(method_family = none)]
         pub unsafe fn canEvaluatePolicy_error(
@@ -294,6 +298,10 @@ impl LAContext {
         /// LAErrorUserCancel if user has tapped the Cancel button
         ///
         /// LAErrorSystemCancel if some system event interrupted the evaluation (e.g. Home button pressed).
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize the evaluation and its completion with concurrent `LocalAuthentication` operations in the process, including context and right construction, and treat callback error pointers as nullable borrowed values.
         #[unsafe(method(evaluatePolicy:localizedReason:reply:))]
         #[unsafe(method_family = none)]
         pub unsafe fn evaluatePolicy_localizedReason_reply(
@@ -314,6 +322,10 @@ impl LAContext {
         /// used for policy evaluation and an attempt to do so will fail with LAErrorInvalidContext.
         ///
         /// Invalidating a context that has been already invalidated has no effect.
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize mutable state shared with the evaluation completion that invalidation may trigger on a framework-private queue.
         #[unsafe(method(invalidate))]
         #[unsafe(method_family = none)]
         pub unsafe fn invalidate(&self);
@@ -333,6 +345,10 @@ impl LAContext {
         ///
         ///
         /// Returns: YES if the credential was set successfully, NO otherwise.
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize accesses to this context's credential state with other operations that can read or change it.
         #[unsafe(method(setCredential:type:))]
         #[unsafe(method_family = none)]
         pub unsafe fn setCredential_type(
@@ -348,6 +364,10 @@ impl LAContext {
         ///
         ///
         /// Returns: YES on success, NO otherwise.
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize accesses to this context's credential state with other operations that can read or change it.
         #[unsafe(method(isCredentialSet:))]
         #[unsafe(method_family = none)]
         pub unsafe fn isCredentialSet(&self, r#type: LACredentialType) -> bool;
@@ -402,6 +422,10 @@ impl LAContext {
         ///
         /// Warning: localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if
         /// nil or empty string is specified.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize the evaluation and its completion with concurrent `LocalAuthentication` operations in the process, including context and right construction, and treat callback error pointers as nullable borrowed values.
         #[unsafe(method(evaluateAccessControl:operation:localizedReason:reply:))]
         #[unsafe(method_family = none)]
         pub unsafe fn evaluateAccessControl_operation_localizedReason_reply(
@@ -416,6 +440,10 @@ impl LAContext {
         ///
         /// Allows fallback button title customization. If set to empty string, the button will be hidden.
         /// A default title "Use Password…" is used when this property is left nil.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(localizedFallbackTitle))]
         #[unsafe(method_family = none)]
         pub unsafe fn localizedFallbackTitle(&self) -> Option<Retained<NSString>>;
@@ -423,17 +451,29 @@ impl LAContext {
         /// Setter for [`localizedFallbackTitle`][Self::localizedFallbackTitle].
         ///
         /// This is [copied][objc2_foundation::NSCopying::copy] when set.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(setLocalizedFallbackTitle:))]
         #[unsafe(method_family = none)]
         pub unsafe fn setLocalizedFallbackTitle(&self, localized_fallback_title: Option<&NSString>);
 
         /// This property is deprecated and setting it has no effect.
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize reads and writes of this deprecated non-atomic property across threads.
         #[deprecated = "No longer supported"]
         #[unsafe(method(maxBiometryFailures))]
         #[unsafe(method_family = none)]
         pub unsafe fn maxBiometryFailures(&self) -> Option<Retained<NSNumber>>;
 
         /// Setter for [`maxBiometryFailures`][Self::maxBiometryFailures].
+        ///
+        /// # Safety
+        ///
+        /// The caller must synchronize reads and writes of this deprecated non-atomic property across threads.
         #[deprecated = "No longer supported"]
         #[unsafe(method(setMaxBiometryFailures:))]
         #[unsafe(method_family = none)]
@@ -443,6 +483,10 @@ impl LAContext {
         ///
         /// Allows cancel button title customization. A default title "Cancel" is used when
         /// this property is left nil or is set to empty string.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(localizedCancelTitle))]
         #[unsafe(method_family = none)]
         pub unsafe fn localizedCancelTitle(&self) -> Option<Retained<NSString>>;
@@ -450,6 +494,10 @@ impl LAContext {
         /// Setter for [`localizedCancelTitle`][Self::localizedCancelTitle].
         ///
         /// This is [copied][objc2_foundation::NSCopying::copy] when set.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(setLocalizedCancelTitle:))]
         #[unsafe(method_family = none)]
         pub unsafe fn setLocalizedCancelTitle(&self, localized_cancel_title: Option<&NSString>);
@@ -471,11 +519,19 @@ impl LAContext {
         ///
         ///
         /// See: LATouchIDAuthenticationMaximumAllowableReuseDuration
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(touchIDAuthenticationAllowableReuseDuration))]
         #[unsafe(method_family = none)]
         pub unsafe fn touchIDAuthenticationAllowableReuseDuration(&self) -> NSTimeInterval;
 
         /// Setter for [`touchIDAuthenticationAllowableReuseDuration`][Self::touchIDAuthenticationAllowableReuseDuration].
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(setTouchIDAuthenticationAllowableReuseDuration:))]
         #[unsafe(method_family = none)]
         pub unsafe fn setTouchIDAuthenticationAllowableReuseDuration(
@@ -489,6 +545,10 @@ impl LAContext {
         /// A localized string from this property is displayed in the authentication UI if the caller didn't specify
         /// its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property
         /// is ignored if the authentication reason was provided by caller.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(localizedReason))]
         #[unsafe(method_family = none)]
         pub unsafe fn localizedReason(&self) -> Retained<NSString>;
@@ -496,6 +556,10 @@ impl LAContext {
         /// Setter for [`localizedReason`][Self::localizedReason].
         ///
         /// This is [copied][objc2_foundation::NSCopying::copy] when set.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(setLocalizedReason:))]
         #[unsafe(method_family = none)]
         pub unsafe fn setLocalizedReason(&self, localized_reason: &NSString);
@@ -510,17 +574,29 @@ impl LAContext {
         ///
         /// If this property is used with a LocalAuthentication evaluation, it will eventually fail with
         /// LAErrorNotInteractive instead of displaying the authentication UI.
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(interactionNotAllowed))]
         #[unsafe(method_family = none)]
         pub unsafe fn interactionNotAllowed(&self) -> bool;
 
         /// Setter for [`interactionNotAllowed`][Self::interactionNotAllowed].
+        ///
+        /// # Safety
+        ///
+        /// The caller must serialize access to this non-atomic property with concurrent reads, writes, and pending evaluations on this context.
         #[unsafe(method(setInteractionNotAllowed:))]
         #[unsafe(method_family = none)]
         pub unsafe fn setInteractionNotAllowed(&self, interaction_not_allowed: bool);
 
         #[cfg(feature = "LABiometryType")]
         /// Indicates the type of the biometry supported by the device.
+        ///
+        /// # Safety
+        ///
+        /// The caller must prevent concurrent `LocalAuthentication` operations in the process from accessing biometry state, including operations on other contexts and asynchronous completions.
         #[unsafe(method(biometryType))]
         #[unsafe(method_family = none)]
         pub unsafe fn biometryType(&self) -> LABiometryType;
@@ -539,6 +615,10 @@ impl LAContext {
         ///
         /// Warning: Please note that the value returned by this property can change exceptionally between major OS versions even if
         /// the state of biometry has not changed.
+        ///
+        /// # Safety
+        ///
+        /// The caller must prevent concurrent `LocalAuthentication` operations in the process from accessing biometry state, including operations on other contexts and asynchronous completions.
         #[deprecated]
         #[unsafe(method(evaluatedPolicyDomainState))]
         #[unsafe(method_family = none)]
@@ -546,6 +626,10 @@ impl LAContext {
 
         #[cfg(feature = "LADomainState")]
         /// Contains authentication domain state.
+        ///
+        /// # Safety
+        ///
+        /// The caller must prevent concurrent `LocalAuthentication` operations in the process from accessing biometry state, including operations on other contexts and asynchronous completions.
         #[unsafe(method(domainState))]
         #[unsafe(method_family = none)]
         pub unsafe fn domainState(&self) -> Retained<LADomainState>;
@@ -555,10 +639,16 @@ impl LAContext {
 /// Methods declared on superclass `NSObject`.
 impl LAContext {
     extern_methods!(
+        /// # Safety
+        ///
+        /// The caller must serialize construction with all concurrent `LocalAuthentication` operations in the process, including asynchronous completions, because it can update shared counters.
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
         pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
 
+        /// # Safety
+        ///
+        /// The caller must serialize construction with all concurrent `LocalAuthentication` operations in the process, including asynchronous completions, because it can update shared counters.
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
         pub unsafe fn new() -> Retained<Self>;

@@ -27,7 +27,7 @@ impl LAPersistedRight {
         /// Managed private key
         #[unsafe(method(key))]
         #[unsafe(method_family = none)]
-        pub unsafe fn key(&self) -> Retained<LAPrivateKey>;
+        pub fn key(&self) -> Retained<LAPrivateKey>;
 
         #[cfg(feature = "LASecret")]
         /// Generic secret
@@ -35,7 +35,7 @@ impl LAPersistedRight {
         /// This is the generic secret that would have been stored along with the right
         #[unsafe(method(secret))]
         #[unsafe(method_family = none)]
-        pub unsafe fn secret(&self) -> Retained<LASecret>;
+        pub fn secret(&self) -> Retained<LASecret>;
     );
 }
 
@@ -50,6 +50,10 @@ impl LAPersistedRight {
         /// Parameter `requirement`: Requirement that needs to be satisfied to authorize the right
         ///
         /// Returns: `LARight`instance
+        ///
+        /// # Safety
+        ///
+        /// This inherited initializer must not be called on `LAPersistedRight` because instances are only obtained through `LARightStore`.
         #[unsafe(method(initWithRequirement:))]
         #[unsafe(method_family = init)]
         pub unsafe fn initWithRequirement(
