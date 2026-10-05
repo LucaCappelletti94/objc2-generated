@@ -40,10 +40,6 @@ impl LAPrivateKey {
         /// `SecKeyAlgorithm`suitable for generating signatures with this key – e.g:
         /// `kSecKeyAlgorithmECDSASignatureMessageX962SHA256`
         /// Parameter `handler`: Completion handler with the signature of given data or an error on failure.
-        ///
-        /// # Safety
-        ///
-        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(signData:secKeyAlgorithm:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn signData_secKeyAlgorithm_completion(
@@ -73,10 +69,6 @@ impl LAPrivateKey {
         /// `SecKeyAlgorithm`suitable for decrypting data with this key –e.g:
         /// `kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM`
         /// Parameter `handler`: Completion handler with plaintext or an error on failure.
-        ///
-        /// # Safety
-        ///
-        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(decryptData:secKeyAlgorithm:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn decryptData_secKeyAlgorithm_completion(
@@ -112,8 +104,6 @@ impl LAPrivateKey {
         /// # Safety
         ///
         /// `parameters` generic should be of the correct type.
-        ///
-        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn exchangeKeysWithPublicKey_secKeyAlgorithm_secKeyParameters_completion(

@@ -28,10 +28,6 @@ impl LAPublicKey {
         /// Exports public key bytes.
         ///
         /// Parameter `handler`: Completion handler with the raw bytes of the public key or an error on failure
-        ///
-        /// # Safety
-        ///
-        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(exportBytesWithCompletion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn exportBytesWithCompletion(
@@ -49,10 +45,6 @@ impl LAPublicKey {
         /// `kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM`.
         ///
         /// Parameter `handler`: Completion handler with the cipher text or an error on failure.
-        ///
-        /// # Safety
-        ///
-        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback result pointers as nullable borrowed values.
         #[unsafe(method(encryptData:secKeyAlgorithm:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn encryptData_secKeyAlgorithm_completion(
@@ -83,10 +75,6 @@ impl LAPublicKey {
         /// `SecKeyAlgorithm`suitable for verifying signatures with this key –e.g:
         /// `kSecKeyAlgorithmECDSASignatureMessageX962SHA256`
         /// Parameter `handler`: Completion handler with the signature of given data or an error on failure.
-        ///
-        /// # Safety
-        ///
-        /// The caller must synchronize mutable state accessed by the sendable completion across threads and treat callback error pointers as nullable borrowed values.
         #[unsafe(method(verifyData:signature:secKeyAlgorithm:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn verifyData_signature_secKeyAlgorithm_completion(

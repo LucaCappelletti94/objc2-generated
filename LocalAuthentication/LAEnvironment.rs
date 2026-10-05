@@ -26,10 +26,6 @@ impl LAEnvironment {
         /// Adds observer to monitor changes of the environment.
         ///
         /// The observer will be held weakly so its instance should be kept alive by the caller.
-        ///
-        /// # Safety
-        ///
-        /// The caller must keep the weakly held observer alive and synchronize its state with callbacks invoked on framework-private queues.
         #[unsafe(method(addObserver:))]
         #[unsafe(method_family = none)]
         pub unsafe fn addObserver(&self, observer: &ProtocolObject<dyn LAEnvironmentObserver>);
@@ -37,10 +33,6 @@ impl LAEnvironment {
         /// Removes the previously registered observer.
         ///
         /// If the observer is deallocated, it will be removed automatically.
-        ///
-        /// # Safety
-        ///
-        /// The caller must keep the observer alive during removal and synchronize mutable state shared with its callback on the framework-private queue.
         #[unsafe(method(removeObserver:))]
         #[unsafe(method_family = none)]
         pub unsafe fn removeObserver(&self, observer: &ProtocolObject<dyn LAEnvironmentObserver>);
@@ -68,10 +60,6 @@ extern_protocol!(
         /// `LAEnvironment.state`already contains the new updated state.
         ///
         /// Parameter `oldState`: The old environment state (before update)
-        ///
-        /// # Safety
-        ///
-        /// Implementors must synchronize observer state with other calls because this callback can run on a framework-private queue.
         #[optional]
         #[unsafe(method(environment:stateDidChangeFromOldState:))]
         #[unsafe(method_family = none)]

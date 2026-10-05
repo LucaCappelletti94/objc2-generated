@@ -50,10 +50,6 @@ impl LAPersistedRight {
         /// Parameter `requirement`: Requirement that needs to be satisfied to authorize the right
         ///
         /// Returns: `LARight`instance
-        ///
-        /// # Safety
-        ///
-        /// This inherited initializer must not be called on `LAPersistedRight` because instances are only obtained through `LARightStore`.
         #[unsafe(method(initWithRequirement:))]
         #[unsafe(method_family = init)]
         pub unsafe fn initWithRequirement(

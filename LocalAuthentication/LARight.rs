@@ -65,42 +65,26 @@ impl LARight {
     extern_methods!(
         /// Provides the current authorization state of the
         /// `LARight`instance
-        ///
-        /// # Safety
-        ///
-        /// The caller must ensure no concurrent operation can update this right's state while reading it, including framework-managed authorization completions.
         #[unsafe(method(state))]
         #[unsafe(method_family = none)]
         pub unsafe fn state(&self) -> LARightState;
 
         /// An application-supplied integer that can be used to identify right instances. The default value is
         /// `0.`
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize reads and writes of this right's non-atomic `tag` property across threads.
         #[unsafe(method(tag))]
         #[unsafe(method_family = none)]
-        pub unsafe fn tag(&self) -> NSInteger;
+        pub fn tag(&self) -> NSInteger;
 
         /// Setter for [`tag`][Self::tag].
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize reads and writes of this right's non-atomic `tag` property across threads.
         #[unsafe(method(setTag:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn setTag(&self, tag: NSInteger);
+        pub fn setTag(&self, tag: NSInteger);
 
         /// Constructs a right using default authorization requirements
         ///
         /// For authorizing a right with default requirements a user will be asked to authenticate using biometry or the device passcode.
         ///
         /// Returns: `LARight`instance
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize construction with all concurrent `LocalAuthentication` operations in the process, including asynchronous completions, because it can construct an `LAContext`.
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
         pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
@@ -112,10 +96,6 @@ impl LARight {
         /// Parameter `requirement`: Requirement that needs to be satisfied to authorize the right
         ///
         /// Returns: `LARight`instance
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize construction with all concurrent `LocalAuthentication` operations in the process, including asynchronous completions, because it can construct an `LAContext`.
         #[unsafe(method(initWithRequirement:))]
         #[unsafe(method_family = init)]
         pub unsafe fn initWithRequirement(
@@ -129,10 +109,6 @@ impl LARight {
         /// Parameter `localizedReason`: Localized explanation for the authorization. Appears in the UI presented to the user.
         ///
         /// Parameter `handler`: Completion handler called after the authorization finishes. Returns an error when the authorization fails.
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize this operation and its completion with concurrent `LocalAuthentication` operations, including accesses to this right's state, and treat callback error pointers as nullable borrowed values.
         #[unsafe(method(authorizeWithLocalizedReason:completion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn authorizeWithLocalizedReason_completion(
@@ -146,10 +122,6 @@ impl LARight {
         ///
         /// Parameter `handler`: Completion handler. Returns
         /// `nil`if the right can be authorized or an error otherwise.
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize this operation and its completion with concurrent `LocalAuthentication` operations, including accesses to this right's state, and treat callback error pointers as nullable borrowed values.
         #[unsafe(method(checkCanAuthorizeWithCompletion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn checkCanAuthorizeWithCompletion(
@@ -161,10 +133,6 @@ impl LARight {
         /// Invalidates a previously authorized right.
         ///
         /// Parameter `handler`: Completion handler called after the right is deauthorized.
-        ///
-        /// # Safety
-        ///
-        /// The caller must serialize this operation and its completion with concurrent `LocalAuthentication` operations, including accesses to this right's state.
         #[unsafe(method(deauthorizeWithCompletion:))]
         #[unsafe(method_family = none)]
         pub unsafe fn deauthorizeWithCompletion(
@@ -177,9 +145,6 @@ impl LARight {
 /// Methods declared on superclass `NSObject`.
 impl LARight {
     extern_methods!(
-        /// # Safety
-        ///
-        /// The caller must serialize construction with all concurrent `LocalAuthentication` operations in the process, including asynchronous completions, because it can construct an `LAContext`.
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
         pub unsafe fn new() -> Retained<Self>;

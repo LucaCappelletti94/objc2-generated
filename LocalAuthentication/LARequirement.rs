@@ -73,16 +73,10 @@ impl LAAuthenticationRequirement {
 /// Methods declared on superclass `NSObject`.
 impl LAAuthenticationRequirement {
     extern_methods!(
-        /// # Safety
-        ///
-        /// Callers must use documented factory methods because this initializer has no specified behavior for creating a usable requirement.
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
         pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
 
-        /// # Safety
-        ///
-        /// Callers must use documented factory methods because this constructor has no specified behavior for creating a usable requirement.
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
         pub unsafe fn new() -> Retained<Self>;
@@ -123,16 +117,10 @@ impl LABiometryFallbackRequirement {
 /// Methods declared on superclass `NSObject`.
 impl LABiometryFallbackRequirement {
     extern_methods!(
-        /// # Safety
-        ///
-        /// Callers must use documented factory methods because this initializer has no specified behavior for creating a usable requirement.
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
         pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
 
-        /// # Safety
-        ///
-        /// Callers must use documented factory methods because this constructor has no specified behavior for creating a usable requirement.
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
         pub unsafe fn new() -> Retained<Self>;
