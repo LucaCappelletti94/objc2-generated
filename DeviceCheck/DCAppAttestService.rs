@@ -55,7 +55,7 @@ impl DCAppAttestService {
         /// cryptographic key, and then to assert your app’s validity using that key.
         #[unsafe(method(sharedService))]
         #[unsafe(method_family = none)]
-        pub unsafe fn sharedService() -> Retained<DCAppAttestService>;
+        pub fn sharedService() -> Retained<DCAppAttestService>;
 
         /// A Boolean value that indicates whether a particular device provides the App
         /// Attest service.
@@ -277,10 +277,17 @@ impl DCAppAttestService {
     extern_methods!(
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
-        pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
+        pub fn init(this: Allocated<Self>) -> Retained<Self>;
 
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
-        pub unsafe fn new() -> Retained<Self>;
+        pub fn new() -> Retained<Self>;
     );
+}
+
+impl DefaultRetained for DCAppAttestService {
+    #[inline]
+    fn default_retained() -> Retained<Self> {
+        Self::new()
+    }
 }
