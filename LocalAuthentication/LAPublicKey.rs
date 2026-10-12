@@ -62,7 +62,7 @@ impl LAPublicKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canEncryptUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canEncryptUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
+        pub fn canEncryptUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Verifies a digital signature for the given data.
@@ -93,6 +93,6 @@ impl LAPublicKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canVerifyUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canVerifyUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
+        pub fn canVerifyUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
     );
 }

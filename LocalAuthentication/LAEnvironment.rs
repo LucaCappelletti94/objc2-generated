@@ -40,13 +40,13 @@ impl LAEnvironment {
         /// Environment of the current user.
         #[unsafe(method(currentUser))]
         #[unsafe(method_family = none)]
-        pub unsafe fn currentUser() -> Retained<LAEnvironment>;
+        pub fn currentUser() -> Retained<LAEnvironment>;
 
         #[cfg(feature = "LAEnvironmentState")]
         /// The environment state information.
         #[unsafe(method(state))]
         #[unsafe(method_family = none)]
-        pub unsafe fn state(&self) -> Retained<LAEnvironmentState>;
+        pub fn state(&self) -> Retained<LAEnvironmentState>;
     );
 }
 

@@ -26,7 +26,7 @@ impl LAAuthenticationRequirement {
         /// Returns: `LAAuthenticationRequirement`instance
         #[unsafe(method(defaultRequirement))]
         #[unsafe(method_family = none)]
-        pub unsafe fn defaultRequirement() -> Retained<LAAuthenticationRequirement>;
+        pub fn defaultRequirement() -> Retained<LAAuthenticationRequirement>;
 
         /// Requires biometric authentication
         ///
@@ -39,7 +39,7 @@ impl LAAuthenticationRequirement {
         /// Returns: `LAAuthenticationRequirement`instance
         #[unsafe(method(biometryRequirement))]
         #[unsafe(method_family = none)]
-        pub unsafe fn biometryRequirement() -> Retained<LAAuthenticationRequirement>;
+        pub fn biometryRequirement() -> Retained<LAAuthenticationRequirement>;
 
         /// Requires user authentication with the current biometric set
         ///
@@ -54,7 +54,7 @@ impl LAAuthenticationRequirement {
         /// Returns: `LAAuthenticationRequirement`instance
         #[unsafe(method(biometryCurrentSetRequirement))]
         #[unsafe(method_family = none)]
-        pub unsafe fn biometryCurrentSetRequirement() -> Retained<LAAuthenticationRequirement>;
+        pub fn biometryCurrentSetRequirement() -> Retained<LAAuthenticationRequirement>;
 
         /// Requires biometric authentication or the given fallback method.
         ///
@@ -64,7 +64,7 @@ impl LAAuthenticationRequirement {
         /// Returns: `LAAuthenticationRequirement`instance
         #[unsafe(method(biometryRequirementWithFallback:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn biometryRequirementWithFallback(
+        pub fn biometryRequirementWithFallback(
             fallback: &LABiometryFallbackRequirement,
         ) -> Retained<Self>;
     );
@@ -103,14 +103,14 @@ impl LABiometryFallbackRequirement {
         /// Returns: `LABiometryFallbackRequirement`instance
         #[unsafe(method(defaultRequirement))]
         #[unsafe(method_family = none)]
-        pub unsafe fn defaultRequirement() -> Retained<LABiometryFallbackRequirement>;
+        pub fn defaultRequirement() -> Retained<LABiometryFallbackRequirement>;
 
         /// Requires authorization using the device passcode
         ///
         /// Returns: `LABiometryFallbackRequirement`instance
         #[unsafe(method(devicePasscodeRequirement))]
         #[unsafe(method_family = none)]
-        pub unsafe fn devicePasscodeRequirement() -> Retained<LABiometryFallbackRequirement>;
+        pub fn devicePasscodeRequirement() -> Retained<LABiometryFallbackRequirement>;
     );
 }
 

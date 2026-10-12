@@ -27,7 +27,7 @@ impl LARightStore {
         /// `LARightStore.`
         #[unsafe(method(sharedStore))]
         #[unsafe(method_family = none)]
-        pub unsafe fn sharedStore() -> Retained<LARightStore>;
+        pub fn sharedStore() -> Retained<LARightStore>;
 
         #[cfg(all(feature = "LAPersistedRight", feature = "LARight", feature = "block2"))]
         /// Fetches a right stored under the given identifier.
@@ -88,7 +88,7 @@ impl LARightStore {
         /// Parameter `handler`: Completion handler with an error on failure.
         #[unsafe(method(removeRight:completion:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn removeRight_completion(
+        pub fn removeRight_completion(
             &self,
             right: &LAPersistedRight,
             handler: &block2::SendableBlock<'static, fn(*mut NSError)>,
@@ -103,7 +103,7 @@ impl LARightStore {
         /// Parameter `handler`: Completion handler with an error on failure.
         #[unsafe(method(removeRightForIdentifier:completion:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn removeRightForIdentifier_completion(
+        pub fn removeRightForIdentifier_completion(
             &self,
             identifier: &NSString,
             handler: &block2::SendableBlock<'static, fn(*mut NSError)>,
@@ -115,7 +115,7 @@ impl LARightStore {
         /// Parameter `handler`: Completion handler with an error on failure.
         #[unsafe(method(removeAllRightsWithCompletion:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn removeAllRightsWithCompletion(
+        pub fn removeAllRightsWithCompletion(
             &self,
             handler: &block2::SendableBlock<'static, fn(*mut NSError)>,
         );

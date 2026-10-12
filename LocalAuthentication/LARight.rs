@@ -73,12 +73,12 @@ impl LARight {
         /// `0.`
         #[unsafe(method(tag))]
         #[unsafe(method_family = none)]
-        pub unsafe fn tag(&self) -> NSInteger;
+        pub fn tag(&self) -> NSInteger;
 
         /// Setter for [`tag`][Self::tag].
         #[unsafe(method(setTag:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn setTag(&self, tag: NSInteger);
+        pub fn setTag(&self, tag: NSInteger);
 
         /// Constructs a right using default authorization requirements
         ///

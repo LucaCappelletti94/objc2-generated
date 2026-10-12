@@ -27,7 +27,7 @@ impl LAPersistedRight {
         /// Managed private key
         #[unsafe(method(key))]
         #[unsafe(method_family = none)]
-        pub unsafe fn key(&self) -> Retained<LAPrivateKey>;
+        pub fn key(&self) -> Retained<LAPrivateKey>;
 
         #[cfg(feature = "LASecret")]
         /// Generic secret
@@ -35,7 +35,7 @@ impl LAPersistedRight {
         /// This is the generic secret that would have been stored along with the right
         #[unsafe(method(secret))]
         #[unsafe(method_family = none)]
-        pub unsafe fn secret(&self) -> Retained<LASecret>;
+        pub fn secret(&self) -> Retained<LASecret>;
     );
 }
 

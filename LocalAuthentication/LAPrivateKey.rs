@@ -29,7 +29,7 @@ impl LAPrivateKey {
         /// `LAPrivateKey`instance
         #[unsafe(method(publicKey))]
         #[unsafe(method_family = none)]
-        pub unsafe fn publicKey(&self) -> Retained<LAPublicKey>;
+        pub fn publicKey(&self) -> Retained<LAPublicKey>;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Generates a digital signature for the given data.
@@ -57,7 +57,7 @@ impl LAPrivateKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canSignUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canSignUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
+        pub fn canSignUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Decrypts the given ciphertext
@@ -86,7 +86,7 @@ impl LAPrivateKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canDecryptUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canDecryptUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
+        pub fn canDecryptUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
 
         #[cfg(all(feature = "block2", feature = "objc2-security"))]
         /// Performs a Diffie-Hellman style key exchange operation
@@ -122,9 +122,6 @@ impl LAPrivateKey {
         /// Returns: `YES`in case the key supports the provided algorithm with the specified operation.
         #[unsafe(method(canExchangeKeysUsingSecKeyAlgorithm:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn canExchangeKeysUsingSecKeyAlgorithm(
-            &self,
-            algorithm: &SecKeyAlgorithm,
-        ) -> bool;
+        pub fn canExchangeKeysUsingSecKeyAlgorithm(&self, algorithm: &SecKeyAlgorithm) -> bool;
     );
 }

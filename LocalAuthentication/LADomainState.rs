@@ -23,7 +23,7 @@ impl LADomainStateBiometry {
         /// Indicates biometry type available on the device.
         #[unsafe(method(biometryType))]
         #[unsafe(method_family = none)]
-        pub unsafe fn biometryType(&self) -> LABiometryType;
+        pub fn biometryType(&self) -> LABiometryType;
 
         /// Contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled.
         ///
@@ -38,7 +38,7 @@ impl LADomainStateBiometry {
         /// the state of biometry has not changed.
         #[unsafe(method(stateHash))]
         #[unsafe(method_family = none)]
-        pub unsafe fn stateHash(&self) -> Option<Retained<NSData>>;
+        pub fn stateHash(&self) -> Option<Retained<NSData>>;
     );
 }
 
@@ -60,7 +60,7 @@ impl LADomainStateCompanion {
         /// ``LACompanionType`.`
         #[unsafe(method(availableCompanionTypes))]
         #[unsafe(method_family = none)]
-        pub unsafe fn availableCompanionTypes(&self) -> Retained<NSSet<NSNumber>>;
+        pub fn availableCompanionTypes(&self) -> Retained<NSSet<NSNumber>>;
 
         /// Contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired.
         ///
@@ -81,7 +81,7 @@ impl LADomainStateCompanion {
         /// the list of paired companions has not changed.
         #[unsafe(method(stateHash))]
         #[unsafe(method_family = none)]
-        pub unsafe fn stateHash(&self) -> Option<Retained<NSData>>;
+        pub fn stateHash(&self) -> Option<Retained<NSData>>;
 
         #[cfg(feature = "LACompanionType")]
         /// Returns state hash data for the given companion type.
@@ -96,7 +96,7 @@ impl LADomainStateCompanion {
         /// Parameter `companionType`: The companion type for which state hash data should be returned.
         #[unsafe(method(stateHashForCompanionType:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn stateHashForCompanionType(
+        pub fn stateHashForCompanionType(
             &self,
             companion_type: LACompanionType,
         ) -> Option<Retained<NSData>>;
@@ -119,12 +119,12 @@ impl LADomainState {
         /// Contains biometric domain state.
         #[unsafe(method(biometry))]
         #[unsafe(method_family = none)]
-        pub unsafe fn biometry(&self) -> Retained<LADomainStateBiometry>;
+        pub fn biometry(&self) -> Retained<LADomainStateBiometry>;
 
         /// Contains companion domain state.
         #[unsafe(method(companion))]
         #[unsafe(method_family = none)]
-        pub unsafe fn companion(&self) -> Retained<LADomainStateCompanion>;
+        pub fn companion(&self) -> Retained<LADomainStateCompanion>;
 
         /// Contains combined state hash data for biometry and companion state hashes.
         ///
@@ -133,6 +133,6 @@ impl LADomainState {
         /// the list of paired companions has not changed.
         #[unsafe(method(stateHash))]
         #[unsafe(method_family = none)]
-        pub unsafe fn stateHash(&self) -> Option<Retained<NSData>>;
+        pub fn stateHash(&self) -> Option<Retained<NSData>>;
     );
 }
