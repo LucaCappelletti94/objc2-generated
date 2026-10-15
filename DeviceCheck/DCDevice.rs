@@ -60,13 +60,13 @@ impl DCDevice {
         /// data.
         #[unsafe(method(currentDevice))]
         #[unsafe(method_family = none)]
-        pub unsafe fn currentDevice() -> Retained<DCDevice>;
+        pub fn currentDevice() -> Retained<DCDevice>;
 
         /// A Boolean value that indicates whether the device supports the DeviceCheck
         /// API.
         #[unsafe(method(isSupported))]
         #[unsafe(method_family = none)]
-        pub unsafe fn isSupported(&self) -> bool;
+        pub fn isSupported(&self) -> bool;
 
         #[cfg(feature = "block2")]
         /// Generates a token that identifies the current device.
@@ -102,7 +102,7 @@ impl DCDevice {
         /// - `error`: The error that occurred, if any.
         #[unsafe(method(generateTokenWithCompletionHandler:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn generateTokenWithCompletionHandler(
+        pub fn generateTokenWithCompletionHandler(
             &self,
             completion: &block2::SendableBlock<'static, fn(*mut NSData, *mut NSError)>,
         );
@@ -114,10 +114,17 @@ impl DCDevice {
     extern_methods!(
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
-        pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
+        pub fn init(this: Allocated<Self>) -> Retained<Self>;
 
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
-        pub unsafe fn new() -> Retained<Self>;
+        pub fn new() -> Retained<Self>;
     );
+}
+
+impl DefaultRetained for DCDevice {
+    #[inline]
+    fn default_retained() -> Retained<Self> {
+        Self::new()
+    }
 }

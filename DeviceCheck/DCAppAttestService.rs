@@ -87,7 +87,7 @@ impl DCAppAttestService {
         /// WatchKit extension bypasses attestation.
         #[unsafe(method(isSupported))]
         #[unsafe(method_family = none)]
-        pub unsafe fn isSupported(&self) -> bool;
+        pub fn isSupported(&self) -> bool;
 
         #[cfg(feature = "block2")]
         /// Creates a new cryptographic key for use with the App Attest service.
@@ -139,7 +139,7 @@ impl DCAppAttestService {
         /// reason for failure, or `nil` on success.
         #[unsafe(method(generateKeyWithCompletionHandler:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn generateKeyWithCompletionHandler(
+        pub fn generateKeyWithCompletionHandler(
             &self,
             completion_handler: &block2::SendableBlock<'static, fn(*mut NSString, *mut NSError)>,
         );
@@ -210,7 +210,7 @@ impl DCAppAttestService {
         /// failure, or `nil` on success.
         #[unsafe(method(attestKey:clientDataHash:completionHandler:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn attestKey_clientDataHash_completionHandler(
+        pub fn attestKey_clientDataHash_completionHandler(
             &self,
             key_id: &NSString,
             client_data_hash: &NSData,
@@ -263,7 +263,7 @@ impl DCAppAttestService {
         /// - `error` : A ``DeviceCheck/DCError-swift.struct`` instance that indicates the reason for failure, or `nil` on success.
         #[unsafe(method(generateAssertion:clientDataHash:completionHandler:))]
         #[unsafe(method_family = none)]
-        pub unsafe fn generateAssertion_clientDataHash_completionHandler(
+        pub fn generateAssertion_clientDataHash_completionHandler(
             &self,
             key_id: &NSString,
             client_data_hash: &NSData,
@@ -277,10 +277,17 @@ impl DCAppAttestService {
     extern_methods!(
         #[unsafe(method(init))]
         #[unsafe(method_family = init)]
-        pub unsafe fn init(this: Allocated<Self>) -> Retained<Self>;
+        pub fn init(this: Allocated<Self>) -> Retained<Self>;
 
         #[unsafe(method(new))]
         #[unsafe(method_family = new)]
-        pub unsafe fn new() -> Retained<Self>;
+        pub fn new() -> Retained<Self>;
     );
+}
+
+impl DefaultRetained for DCAppAttestService {
+    #[inline]
+    fn default_retained() -> Retained<Self> {
+        Self::new()
+    }
 }
