@@ -3952,7 +3952,7 @@ impl NWBrowser {
 ///
 /// See also [Apple's documentation](https://developer.apple.com/documentation/network/nw_browser_browse_results_changed_handler_t?language=objc)
 pub type nw_browser_browse_results_changed_handler_t =
-    block2::Block<'static, fn(NonNull<NWBrowseResult>, NonNull<NWBrowseResult>, bool)>;
+    block2::Block<'static, fn(*mut NWBrowseResult, *mut NWBrowseResult, bool)>;
 
 impl NWBrowser {
     /// Sets a callback handler to be invoked when the browser gets an update
